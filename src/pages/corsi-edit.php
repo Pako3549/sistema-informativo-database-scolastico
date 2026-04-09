@@ -46,7 +46,7 @@ renderPageStart('Modifica Corso');
     <p>
         <label for="id_docente">Docente (opzionale):</label><br>
         <select id="id_docente" name="id_docente">
-            <option value="">-- Nessun docente --</option>
+            <option value="">Nessun docente</option>
             <?php foreach ($docenti as $docente): ?>
                 <option value="<?php echo h($docente['id_docente']); ?>" <?php echo $corso['id_docente'] !== null && (int) $corso['id_docente'] === (int) $docente['id_docente'] ? 'selected' : ''; ?>>
                     <?php echo h($docente['cognome'] . ' ' . $docente['nome']); ?>

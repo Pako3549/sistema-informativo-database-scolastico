@@ -69,9 +69,9 @@ $sqlVoti = '
         ver.tipo,
         c.nome_corso
     FROM voti v
-    INNER JOIN studenti s ON s.id_studente = v.id_studente
-    INNER JOIN verifiche ver ON ver.id_verifica = v.id_verifica
-    INNER JOIN corsi c ON c.id_corso = ver.id_corso
+    JOIN studenti s ON s.id_studente = v.id_studente
+    JOIN verifiche ver ON ver.id_verifica = v.id_verifica
+    JOIN corsi c ON c.id_corso = ver.id_corso
     WHERE 1 = 1
 ';
 
@@ -109,9 +109,9 @@ $sqlStatsStudenti = '
         ROUND(AVG(v.voto), 2) AS media_voti,
         COUNT(v.id_voto) AS numero_voti
     FROM voti v
-    INNER JOIN studenti s ON s.id_studente = v.id_studente
-    INNER JOIN verifiche ver ON ver.id_verifica = v.id_verifica
-    INNER JOIN corsi c ON c.id_corso = ver.id_corso
+    JOIN studenti s ON s.id_studente = v.id_studente
+    JOIN verifiche ver ON ver.id_verifica = v.id_verifica
+    JOIN corsi c ON c.id_corso = ver.id_corso
     WHERE 1 = 1
 ';
 
@@ -154,9 +154,9 @@ $sqlStatsCorsi = '
         ROUND(AVG(v.voto), 2) AS media_corso,
         COUNT(v.id_voto) AS numero_voti
     FROM voti v
-    INNER JOIN verifiche ver ON ver.id_verifica = v.id_verifica
-    INNER JOIN corsi c ON c.id_corso = ver.id_corso
-    INNER JOIN studenti s ON s.id_studente = v.id_studente
+    JOIN verifiche ver ON ver.id_verifica = v.id_verifica
+    JOIN corsi c ON c.id_corso = ver.id_corso
+    JOIN studenti s ON s.id_studente = v.id_studente
     WHERE 1 = 1
 ';
 
@@ -204,7 +204,7 @@ renderFlashMessage();
     <p>
         <label for="id_studente">Studente:</label><br>
         <select id="id_studente" name="id_studente" required>
-            <option value="">-- Seleziona studente --</option>
+            <option value="">Seleziona studente</option>
             <?php foreach ($studenti as $studente): ?>
                 <option value="<?php echo h($studente['id_studente']); ?>">
                     <?php echo h($studente['cognome'] . ' ' . $studente['nome']); ?>
@@ -216,7 +216,7 @@ renderFlashMessage();
     <p>
         <label for="id_verifica">Verifica:</label><br>
         <select id="id_verifica" name="id_verifica" required>
-            <option value="">-- Seleziona verifica --</option>
+            <option value="">Seleziona verifica</option>
             <?php foreach ($verifiche as $verifica): ?>
                 <option value="<?php echo h($verifica['id_verifica']); ?>">
                     <?php echo h($verifica['nome_corso'] . ' - ' . $verifica['tipo'] . ' - ' . $verifica['data_verifica']); ?>
@@ -244,7 +244,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_studente">Studente:</label><br>
         <select id="f_id_studente" name="id_studente">
-            <option value="">-- Tutti --</option>
+            <option value="">Tutti</option>
             <?php foreach ($studenti as $studente): ?>
                 <option value="<?php echo h($studente['id_studente']); ?>" <?php echo $idStudente === (int) $studente['id_studente'] ? 'selected' : ''; ?>>
                     <?php echo h($studente['cognome'] . ' ' . $studente['nome']); ?>
@@ -256,7 +256,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_corso">Corso:</label><br>
         <select id="f_id_corso" name="id_corso">
-            <option value="">-- Tutti --</option>
+            <option value="">Tutti</option>
             <?php foreach ($corsi as $corso): ?>
                 <option value="<?php echo h($corso['id_corso']); ?>" <?php echo $idCorso === (int) $corso['id_corso'] ? 'selected' : ''; ?>>
                     <?php echo h($corso['nome_corso']); ?>

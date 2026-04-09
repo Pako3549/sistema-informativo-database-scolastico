@@ -19,6 +19,11 @@ if (!$verifica) {
 }
 
 $corsi = getCorsi($pdo);
+$tipiVerifica = ['orale' => 'Orale', 'scritto' => 'Scritto'];
+$tipoCorrente = strtolower(trim((string) $verifica['tipo']));
+if (!array_key_exists($tipoCorrente, $tipiVerifica)) {
+    $tipoCorrente = '';
+}
 
 renderPageStart('Modifica Verifica');
 ?>
@@ -44,7 +49,14 @@ renderPageStart('Modifica Verifica');
 
     <p>
         <label for="tipo">Tipo:</label><br>
-        <input type="text" id="tipo" name="tipo" maxlength="20" value="<?php echo h($verifica['tipo']); ?>" required>
+        <select id="tipo" name="tipo" required>
+            <option value="" <?php echo $tipoCorrente === '' ? 'selected' : ''; ?>>Seleziona tipo</option>
+            <?php foreach ($tipiVerifica as $valore => $etichetta): ?>
+                <option value="<?php echo h($valore); ?>" <?php echo $tipoCorrente === $valore ? 'selected' : ''; ?>>
+                    <?php echo h($etichetta); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </p>
 
     <button type="submit">Salva modifiche</button>

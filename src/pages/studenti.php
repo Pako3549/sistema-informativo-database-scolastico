@@ -26,7 +26,7 @@ $sql = '
         c.anno,
         c.sezione
     FROM studenti s
-    LEFT JOIN classi c ON c.id_classe = s.id_classe
+    JOIN classi c ON c.id_classe = s.id_classe
     WHERE 1 = 1
 ';
 $params = [];
@@ -71,7 +71,7 @@ renderFlashMessage();
     <p>
         <label for="id_classe">Classe (opzionale):</label><br>
         <select id="id_classe" name="id_classe">
-            <option value="">-- Nessuna classe --</option>
+            <option value="">Nessuna classe</option>
             <?php foreach ($classi as $classe): ?>
                 <option value="<?php echo h($classe['id_classe']); ?>">
                     <?php echo h($classe['anno'] . $classe['sezione']); ?>
@@ -93,7 +93,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_classe">Classe:</label><br>
         <select id="f_id_classe" name="id_classe">
-            <option value="">-- Tutte --</option>
+            <option value="">Tutte</option>
             <?php foreach ($classi as $classe): ?>
                 <option value="<?php echo h($classe['id_classe']); ?>" <?php echo $idClasse === (int) $classe['id_classe'] ? 'selected' : ''; ?>>
                     <?php echo h($classe['anno'] . $classe['sezione']); ?>

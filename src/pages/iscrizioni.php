@@ -38,9 +38,9 @@ $sql = '
         s.cognome AS cognome_studente,
         c.nome_corso
     FROM iscrizioni i
-    INNER JOIN studenti s ON s.id_studente = i.id_studente
-    LEFT JOIN classi cl ON cl.id_classe = s.id_classe
-    INNER JOIN corsi c ON c.id_corso = i.id_corso
+    JOIN studenti s ON s.id_studente = i.id_studente
+    JOIN classi cl ON cl.id_classe = s.id_classe
+    JOIN corsi c ON c.id_corso = i.id_corso
     WHERE 1 = 1
 ';
 
@@ -74,7 +74,7 @@ renderFlashMessage();
         <p>
             <label for="id_studente">Studente:</label><br>
             <select id="id_studente" name="id_studente" required>
-                <option value="">-- Seleziona studente --</option>
+                <option value="">Seleziona studente</option>
                 <?php foreach ($studenti as $studente): ?>
                     <option value="<?php echo h($studente['id_studente']); ?>">
                         <?php echo h($studente['cognome'] . ' ' . $studente['nome']); ?>
@@ -86,7 +86,7 @@ renderFlashMessage();
         <p>
             <label for="id_corso">Corso:</label><br>
             <select id="id_corso" name="id_corso" required>
-                <option value="">-- Seleziona corso --</option>
+                <option value="">Seleziona corso</option>
                 <?php foreach ($corsi as $corso): ?>
                     <option value="<?php echo h($corso['id_corso']); ?>">
                         <?php echo h($corso['nome_corso']); ?>
@@ -109,7 +109,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_corso">Corso:</label><br>
         <select id="f_id_corso" name="id_corso">
-            <option value="">-- Tutti --</option>
+            <option value="">Tutti</option>
             <?php foreach ($corsi as $corso): ?>
                 <option value="<?php echo h($corso['id_corso']); ?>" <?php echo $idCorso === (int) $corso['id_corso'] ? 'selected' : ''; ?>>
                     <?php echo h($corso['nome_corso']); ?>
@@ -121,7 +121,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_classe">Classe:</label><br>
         <select id="f_id_classe" name="id_classe">
-            <option value="">-- Tutte --</option>
+            <option value="">Tutte</option>
             <?php foreach ($classi as $classe): ?>
                 <option value="<?php echo h($classe['id_classe']); ?>" <?php echo $idClasse === (int) $classe['id_classe'] ? 'selected' : ''; ?>>
                     <?php echo h($classe['anno'] . $classe['sezione']); ?>

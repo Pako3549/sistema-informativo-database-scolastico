@@ -34,8 +34,8 @@ $sql = '
         m.id_materia,
         m.nome_materia
     FROM corsi c
-    LEFT JOIN docenti d ON d.id_docente = c.id_docente
-    INNER JOIN materie m ON m.id_materia = c.id_materia
+    JOIN docenti d ON d.id_docente = c.id_docente
+    JOIN materie m ON m.id_materia = c.id_materia
     WHERE 1 = 1
 ';
 $params = [];
@@ -70,7 +70,7 @@ renderFlashMessage();
     <p>
         <label for="id_materia">Materia:</label><br>
         <select id="id_materia" name="id_materia" required>
-            <option value="">-- Seleziona materia --</option>
+            <option value="">Seleziona materia</option>
             <?php foreach ($materie as $materia): ?>
                 <option value="<?php echo h($materia['id_materia']); ?>">
                     <?php echo h($materia['nome_materia']); ?>
@@ -82,7 +82,7 @@ renderFlashMessage();
     <p>
         <label for="id_docente">Docente (opzionale):</label><br>
         <select id="id_docente" name="id_docente">
-            <option value="">-- Nessun docente --</option>
+            <option value="">Nessun docente</option>
             <?php foreach ($docenti as $docente): ?>
                 <option value="<?php echo h($docente['id_docente']); ?>">
                     <?php echo h($docente['cognome'] . ' ' . $docente['nome']); ?>
@@ -99,7 +99,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_materia">Materia:</label><br>
         <select id="f_id_materia" name="id_materia">
-            <option value="">-- Tutte --</option>
+            <option value="">Tutte</option>
             <?php foreach ($materie as $materia): ?>
                 <option value="<?php echo h($materia['id_materia']); ?>" <?php echo $idMateria === (int) $materia['id_materia'] ? 'selected' : ''; ?>>
                     <?php echo h($materia['nome_materia']); ?>
@@ -111,7 +111,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_docente">Docente:</label><br>
         <select id="f_id_docente" name="id_docente">
-            <option value="">-- Tutti --</option>
+            <option value="">Tutti</option>
             <?php foreach ($docenti as $docente): ?>
                 <option value="<?php echo h($docente['id_docente']); ?>" <?php echo $idDocente === (int) $docente['id_docente'] ? 'selected' : ''; ?>>
                     <?php echo h($docente['cognome'] . ' ' . $docente['nome']); ?>

@@ -44,7 +44,7 @@ renderPageStart('Modifica Studente');
     <p>
         <label for="id_classe">Classe (opzionale):</label><br>
         <select id="id_classe" name="id_classe">
-            <option value="">-- Nessuna classe --</option>
+            <option value="">Nessuna classe</option>
             <?php foreach ($classi as $classe): ?>
                 <option value="<?php echo h($classe['id_classe']); ?>" <?php echo $studente['id_classe'] !== null && (int) $studente['id_classe'] === (int) $classe['id_classe'] ? 'selected' : ''; ?>>
                     <?php echo h($classe['anno'] . $classe['sezione']); ?>

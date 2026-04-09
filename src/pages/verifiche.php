@@ -42,7 +42,7 @@ $sql = '
         c.id_corso,
         c.nome_corso
     FROM verifiche v
-    INNER JOIN corsi c ON c.id_corso = v.id_corso
+    JOIN corsi c ON c.id_corso = v.id_corso
     WHERE 1 = 1
 ';
 $params = [];
@@ -80,7 +80,7 @@ renderFlashMessage();
         <p>
             <label for="id_corso">Corso:</label><br>
             <select id="id_corso" name="id_corso" required>
-                <option value="">-- Seleziona corso --</option>
+                <option value="">Seleziona corso</option>
                 <?php foreach ($corsi as $corso): ?>
                     <option value="<?php echo h($corso['id_corso']); ?>">
                         <?php echo h($corso['nome_corso']); ?>
@@ -96,7 +96,11 @@ renderFlashMessage();
 
         <p>
             <label for="tipo">Tipo:</label><br>
-            <input type="text" id="tipo" name="tipo" maxlength="20" required>
+            <select id="tipo" name="tipo" required>
+                <option value="">Seleziona tipo</option>
+                <option value="orale">Orale</option>
+                <option value="scritto">Scritto</option>
+            </select>
         </p>
 
         <button type="submit">Inserisci verifica</button>
@@ -108,7 +112,7 @@ renderFlashMessage();
     <p>
         <label for="f_id_corso">Corso:</label><br>
         <select id="f_id_corso" name="id_corso">
-            <option value="">-- Tutti --</option>
+            <option value="">Tutti</option>
             <?php foreach ($corsi as $corso): ?>
                 <option value="<?php echo h($corso['id_corso']); ?>" <?php echo $idCorso === (int) $corso['id_corso'] ? 'selected' : ''; ?>>
                     <?php echo h($corso['nome_corso']); ?>

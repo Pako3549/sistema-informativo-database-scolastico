@@ -6,7 +6,7 @@ require_once __DIR__ . '/../common/helpers.php';
 $idVerificaRaw = trim($_POST['id_verifica'] ?? '');
 $idCorsoRaw = trim($_POST['id_corso'] ?? '');
 $dataVerifica = trim($_POST['data_verifica'] ?? '');
-$tipo = trim($_POST['tipo'] ?? '');
+$tipo = strtolower(trim($_POST['tipo'] ?? ''));
 
 if (!ctype_digit($idVerificaRaw) || (int) $idVerificaRaw <= 0) {
     renderErrorAndExit('ID verifica non valido.', '../pages/verifiche.php');
@@ -39,6 +39,9 @@ if (!isValidDateYmd($dataVerifica)) {
 
 if (strlen($tipo) > 20) {
     renderErrorAndExit('Il tipo non può superare 20 caratteri.', '../pages/verifiche.php');
+}
+if (!in_array($tipo, ['orale', 'scritto'], true)) {
+    renderErrorAndExit('Tipo verifica non valido. Scegli orale o scritto.', '../pages/verifiche.php');
 }
 
 $sql = '

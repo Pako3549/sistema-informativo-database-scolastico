@@ -60,7 +60,7 @@ function getVerificheConCorso(PDO $pdo): array
             v.tipo,
             c.nome_corso
         FROM verifiche v
-        INNER JOIN corsi c ON c.id_corso = v.id_corso
+        JOIN corsi c ON c.id_corso = v.id_corso
         ORDER BY v.data_verifica DESC, c.nome_corso, v.id_verifica
     ';
     $stmt = $pdo->query($sql);
