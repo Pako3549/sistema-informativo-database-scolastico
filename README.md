@@ -62,7 +62,7 @@ docker compose up -d --build
 ## Access 🌐
 
 - **Database (local)**: `localhost:3307`
-- **Web app**: exposed through Cloudflare Tunnel route (for example `https://school-crud.pako.uk`)
+- **Web app**: exposed through Cloudflare Tunnel route
 
 > Note: in this setup, the web container is internal-only (`web:80`) and not directly published on host port 8080.
 
